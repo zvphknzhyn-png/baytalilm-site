@@ -1,0 +1,162 @@
+<!doctype html><html lang="fr" data-theme="dark"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Abonnements — BAYT AL-ILM بيت العلم</title><meta name="description" content="BAYT AL-ILM بيت العلم : bots islamiques pour Discord, Telegram et X, radio Coran en direct, horaires de prière et API islamique pour développeurs."><link rel="icon" type="image/png" sizes="32x32" href="assets/img/favicon-32.png"><link rel="apple-touch-icon" sizes="180x180" href="assets/img/apple-touch-icon.png"><link rel="stylesheet" href="assets/css/site.css"><script src="assets/js/site.js"></script><style>
+.thero{padding:84px 0 0;text-align:center}
+.lant{position:relative;margin:50px auto 0;max-width:1100px;aspect-ratio:16/6.4;border-radius:30px 30px 0 0;overflow:hidden}
+.lant img{position:absolute;left:0;right:0;top:-12%;width:100%;height:124%;object-fit:cover;object-position:50% 60%}
+.lant:after{content:"";position:absolute;inset:0;background:linear-gradient(transparent 55%,var(--bg))}
+.lant .fl{position:absolute;border-radius:50%;background:radial-gradient(circle,rgba(255,214,140,.55),transparent 65%);animation:flick 2.6s ease-in-out infinite;mix-blend-mode:screen}
+@keyframes flick{0%,100%{opacity:.55;transform:scale(1)}30%{opacity:.85;transform:scale(1.06)}60%{opacity:.6;transform:scale(.97)}}
+.lant .lab{position:absolute;bottom:6%;transform:translateX(-50%);font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:#E8EEF2;font-weight:700;background:rgba(11,30,54,.6);padding:5px 12px;border-radius:999px;border:1px solid rgba(201,164,92,.5);z-index:2}
+.toggle{display:inline-flex;border:1px solid var(--line2);border-radius:999px;padding:4px;gap:4px;font-size:14.5px;background:var(--chip)}
+.toggle span{padding:9px 20px;border-radius:999px;color:var(--muted)} .toggle span.on{background:var(--text);color:var(--bg);font-weight:600}
+.plans{display:grid;grid-template-columns:1fr 1.08fr 1fr;gap:22px;align-items:stretch;margin-top:56px;position:relative;z-index:3}
+.plan{padding:36px 32px;display:flex;flex-direction:column}
+.plan .amt{font-family:var(--serif);font-size:60px;font-weight:300;line-height:1;margin:20px 0 6px}
+.plan .amt small{font-family:var(--sans);font-size:16px;color:var(--faint)}
+.plan ul{list-style:none;display:grid;gap:13px;margin:26px 0 32px;font-size:15px}
+.plan li{display:grid;grid-template-columns:22px 1fr;gap:8px;line-height:1.45}
+.plan li:before{content:"✓";color:var(--gold);font-weight:700}
+.plan li.x{color:var(--faint)} .plan li.x:before{content:"–";color:var(--faint)}
+.plan li small{display:block;color:var(--faint);font-size:13px;margin-top:2px}
+.plan .btn{margin-top:auto;justify-content:center}
+.plan.feat{border-color:rgba(201,164,92,.7);box-shadow:0 0 0 1px rgba(201,164,92,.35),var(--shadow);animation:breathe 4s ease-in-out infinite}
+@keyframes breathe{0%,100%{box-shadow:0 0 0 1px rgba(201,164,92,.35),0 0 40px -20px rgba(201,164,92,.4)}50%{box-shadow:0 0 0 1px rgba(201,164,92,.6),0 0 80px -10px rgba(201,164,92,.45)}}
+.badge{position:absolute;top:22px;right:22px;font-size:12px;background:var(--gold);color:#0B1E36;padding:5px 11px;border-radius:999px;font-weight:700}
+/* tokens: open layout, no boxes */
+.tok{display:grid;grid-template-columns:1fr 1fr 1fr;margin-top:10px}
+.tk{padding:40px 36px;border-left:1px solid var(--line);position:relative;transition:background .3s}
+.tk:first-child{border-left:0}
+.tk:hover,.tk.is-hover{background:var(--chip)}
+.tk .big{font-family:var(--serif);font-weight:300;font-size:84px;line-height:.9;letter-spacing:-.03em}
+.tk .unit{font-size:15px;color:var(--muted);margin-top:8px;letter-spacing:.12em;text-transform:uppercase;font-weight:600}
+.tk .pr{display:flex;align-items:baseline;justify-content:space-between;margin-top:30px;padding-top:20px;border-top:1px dashed var(--line2)}
+.tk .pr b{font-family:var(--serif);font-weight:400;font-size:34px}
+.tk .best{position:absolute;top:22px;right:30px;font-size:11.5px;font-weight:700;color:var(--acc);letter-spacing:.06em;text-transform:uppercase}
+.coins{position:absolute;right:26px;top:40px;width:70px;height:90px}
+.coins i{position:absolute;left:0;width:56px;height:14px;border-radius:50%;border:1.5px solid var(--gold);background:color-mix(in srgb,var(--gold) 18%,transparent);}
+@keyframes stack{0%,100%{transform:translateY(0)}50%{transform:translateY(-4px)}}
+/* v3 : animations dorées propres à chaque carte, décalées */
+.plan .glint,.life .glint{display:none}
+@property --ang{syntax:'<angle>';inherits:false;initial-value:0deg}
+.a-free:after{content:"";position:absolute;left:0;top:0;height:2px;width:40%;background:linear-gradient(90deg,transparent,#E9CF93,transparent);animation:edge 7s var(--ease) infinite;animation-delay:.4s}
+@keyframes edge{0%{transform:translateX(-110%)}35%,100%{transform:translateX(260%)}}
+.a-year:before{content:"";position:absolute;inset:0;background:linear-gradient(115deg,transparent 35%,rgba(233,207,147,.20) 50%,transparent 65%);transform:translateX(-120%);animation:sheen 8s ease-in-out infinite;animation-delay:2.6s;pointer-events:none}
+@keyframes sheen{0%,55%{transform:translateX(-120%)}80%,100%{transform:translateX(120%)}}
+.a-month:before{content:"";position:absolute;inset:0;border-radius:inherit;padding:1.5px;background:conic-gradient(from var(--ang),transparent 0 78%,#E9CF93 88%,transparent 96%);-webkit-mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);-webkit-mask-composite:xor;mask-composite:exclude;animation:orbit 9s linear infinite;animation-delay:-4.5s;pointer-events:none}
+@keyframes orbit{to{--ang:360deg}}
+.a-life:before{content:"";position:absolute;inset:-40%;background:radial-gradient(circle at 50% 50%,rgba(233,207,147,.22),transparent 40%);animation:glow 10s ease-in-out infinite;animation-delay:5s;pointer-events:none;opacity:0}
+@keyframes glow{0%,100%{opacity:0;transform:translate(-30%,0)}50%{opacity:1;transform:translate(30%,0)}}
+.static .a-free:after,.static .a-year:before,.static .a-month:before,.static .a-life:before{animation-play-state:paused}
+.static .a-free:after{transform:translateX(80%)} .static .a-year:before{transform:translateX(0)} .static .a-life:before{opacity:.8}
+.faqlink{font-weight:600;color:var(--text);text-decoration:underline;text-decoration-color:var(--gold);text-decoration-thickness:2px;text-underline-offset:5px;font-size:16px}
+.faqlink:hover{color:var(--gold)}
+.coins i{transition:opacity .45s var(--ease),transform .45s var(--ease)}
+.coins i.off{opacity:0;transform:translateY(-14px)}
+.coins{top:48px!important;height:120px!important}
+.paymini{display:flex;flex-wrap:wrap;gap:10px 14px;align-items:center;justify-content:center;margin:90px auto 0;font-size:12.5px;color:var(--muted);padding-top:22px;border-top:1px solid var(--line)}
+.paymini .pm-l{display:inline-flex;align-items:center;gap:6px;color:var(--muted);opacity:.8;transition:opacity .25s,color .25s}
+.paymini .pm-l:hover{opacity:1;color:var(--text)}.paymini .sep{color:var(--faint)}
+/* v4 : fond enrichi et continu, sélecteur à 3 onglets, essai gratuit animé */
+.tsec{position:relative;overflow:hidden;padding:0 0 70px}
+.tbg{position:absolute;inset:0;z-index:0;pointer-events:none;background:radial-gradient(ellipse 70% 50% at 50% 8%,rgba(30,63,110,.75),transparent 70%),radial-gradient(ellipse 60% 40% at 50% 62%,rgba(201,164,92,.10),transparent 70%)}
+.tbg:after{content:"";position:absolute;inset:0;opacity:.07;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='96' height='96' viewBox='0 0 96 96'%3E%3Cg fill='none' stroke='%23C9A45C' stroke-width='1'%3E%3Cpath d='M48 8l11 29 29 11-29 11-11 29-11-29L8 48l29-11z'/%3E%3Crect x='28' y='28' width='40' height='40' transform='rotate(45 48 48)'/%3E%3Crect x='28' y='28' width='40' height='40'/%3E%3C/g%3E%3C/svg%3E");-webkit-mask-image:radial-gradient(ellipse 80% 70% at 50% 40%,#000,transparent 75%);mask-image:radial-gradient(ellipse 80% 70% at 50% 40%,#000,transparent 75%)}
+[data-theme=light] .tbg{background:radial-gradient(ellipse 70% 50% at 50% 8%,rgba(30,63,110,.10),transparent 70%),radial-gradient(ellipse 60% 40% at 50% 62%,rgba(201,164,92,.14),transparent 70%)}
+[data-theme=light] .tbg:after{opacity:.12;filter:saturate(.6) brightness(.6)}
+.thero{padding-top:70px!important;text-align:center}
+.toggle button{font:inherit;cursor:pointer;border:0;background:none;padding:9px 20px;border-radius:999px;color:var(--muted);transition:background .3s,color .3s}
+.toggle button.on{background:var(--text);color:var(--bg);font-weight:600}
+.toggle em{font-style:normal;color:var(--gold);font-weight:700;margin-left:4px} .toggle button.on em{color:inherit}
+.trial{display:inline-flex;align-items:center;gap:12px;margin:22px auto 0;padding:9px 20px 9px 12px;border-radius:999px;border:1px solid rgba(201,164,92,.45);background:linear-gradient(90deg,rgba(201,164,92,.14),rgba(201,164,92,.04));position:relative;overflow:hidden}
+.trial:after{content:"";position:absolute;inset:0;background:linear-gradient(110deg,transparent 30%,rgba(243,223,168,.35) 50%,transparent 70%);transform:translateX(-120%);animation:sheen 5s ease-in-out infinite}
+.trial .gift{font-size:20px;animation:bob 2.8s ease-in-out infinite;display:inline-block}
+.trial .tt{font-family:var(--serif);font-size:22px;font-weight:500;background:linear-gradient(90deg,#C9A45C,#F3DFA8,#C9A45C);background-size:200% 100%;-webkit-background-clip:text;background-clip:text;color:transparent;animation:goldtext 4s linear infinite}
+[data-theme=light] .trial .tt{background-image:linear-gradient(90deg,#8a6a2f,#C9A45C,#8a6a2f)}
+.trial .ts{font-size:14px;color:var(--muted)}
+@keyframes goldtext{to{background-position:-200% 0}}
+@keyframes bob{0%,100%{transform:translateY(0) rotate(-4deg)}50%{transform:translateY(-3px) rotate(4deg)}}
+.static .trial:after{animation:none}
+.plans{margin-top:40px!important}
+.plan .badge:empty{display:none}
+.plan .amt{margin-bottom:14px}
+#vie .life .amt small{display:block;margin-top:10px}
+#vie.solo .life{margin-top:40px;transform:scale(1.02);box-shadow:0 0 0 1px rgba(201,164,92,.5),0 0 90px -20px rgba(201,164,92,.5)}
+@media (max-width:760px){.trial{flex-wrap:wrap;justify-content:center;border-radius:18px;text-align:center}.toggle button{padding:8px 13px;font-size:13.5px}}
+/* payment */
+.pay{display:grid;grid-template-columns:1.6fr 1fr;gap:22px}
+.stripe{padding:40px;background:linear-gradient(135deg,rgba(99,91,255,.22),rgba(99,91,255,.05) 60%),var(--surf);border-color:rgba(99,91,255,.45)}
+.stripe .wm{display:flex;align-items:center;gap:14px;color:#635BFF}
+.stripe .wm b{font-size:40px;font-weight:700;letter-spacing:-.03em;color:var(--text);font-family:var(--sans)}
+.cards{display:flex;gap:8px;margin-top:24px;flex-wrap:wrap}
+.cards span{padding:7px 12px;border-radius:8px;border:1px solid var(--line2);font-size:13px;font-weight:600;background:var(--chip)}
+.lock{display:flex;gap:10px;align-items:center;margin-top:22px;color:var(--muted);font-size:14px}
+.smallpay{display:grid;gap:22px}
+.sp{padding:24px 26px;display:flex;gap:16px;align-items:center}
+.sp .plogo{width:46px;height:46px;border-radius:14px}
+.life{margin-top:26px;display:grid;grid-template-columns:.85fr 1.6fr;gap:40px;align-items:center;padding:40px 44px;border-color:rgba(201,164,92,.75);background:linear-gradient(120deg,rgba(201,164,92,.16),transparent 55%),var(--surf);position:relative;overflow:hidden}
+.life .amt{font-family:var(--serif);font-size:64px;font-weight:300;line-height:1;margin:14px 0 6px}
+.life .amt small{font-family:var(--sans);font-size:16px;color:var(--faint)}
+.life ul{list-style:none;display:grid;grid-template-columns:1fr 1fr;gap:14px 30px;font-size:15px;align-items:start;align-content:center}
+@media (max-width:760px){.life ul{grid-template-columns:1fr}.life{padding:26px 22px!important}}
+.life li{display:grid;grid-template-columns:22px 1fr;gap:8px}.life li:before{content:"✦";color:var(--gold)}
+.seats{display:grid;grid-template-columns:repeat(10,1fr);gap:6px}
+.seats i{aspect-ratio:1;border-radius:50%;border:1.5px solid var(--gold);background:rgba(201,164,92,.18);animation:seat 3.2s ease-in-out infinite}
+@keyframes seat{0%,100%{opacity:.55;transform:scale(.85)}50%{opacity:1;transform:scale(1)}}
+.static .seats i{animation:none;opacity:.85}
+.fbadge{display:inline-flex;gap:8px;align-items:center;font-size:12px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:#0B1E36;background:linear-gradient(90deg,#C9A45C,#F3DFA8);padding:6px 12px;border-radius:999px}
+</style></head><body><nav class="nav"><div class="wrap"><a class="logo" href="accueil.html"><span class="lgm"><img class="th-d" src="assets/img/logo-256.jpg" alt="Logo BAYT AL-ILM بيت العلم"><img class="th-l" src="assets/img/logo-256-clair.png" alt="Logo BAYT AL-ILM بيت العلم"></span><span>BAYT AL-ILM</span><span class="ar">بيت العلم</span></a>
+<ul><li class=""><a href="bots.html">Bots</a></li><li class=""><a href="radio.html">Radio</a></li><li class=""><a href="prieres.html">Horaires</a></li><li class="on"><a href="abonnements.html">Abonnements</a></li><li class=""><a href="api.html">API</a></li><li class=""><a href="api.html#catalogue">Docs</a></li></ul><div class="right"><div class="theme" title="Thème"><span class="t-l" data-t="light"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="4.5"/><path d="M12 2v2M12 20v2M2 12h2M20 12h2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg></span><span class="t-d" data-t="dark"><svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M20 14.5A8.5 8.5 0 0 1 9.5 4a8.5 8.5 0 1 0 10.5 10.5Z"/></svg></span></div>
+<a class="hide-m muted" href="dashboard.html">Se connecter</a><a class="btn btn-p btn-sm cta-acc" href="dashboard.html">Créer un compte</a><button class="burger" aria-label="Menu"><i></i><i></i><i></i></button></div></div>
+<div class="mmenu"><a href="bots.html">Bots</a><a href="radio.html">Radio</a><a href="prieres.html">Horaires</a><a href="abonnements.html">Abonnements</a><a href="api.html">API</a><a href="api.html#catalogue">Docs</a><a href="dashboard.html">Se connecter</a><div class="mrow"><span>Thème</span><div class="theme"><span class="t-l" data-t="light"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="4.5"/><path d="M12 2v2M12 20v2M2 12h2M20 12h2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg></span><span class="t-d" data-t="dark"><svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M20 14.5A8.5 8.5 0 0 1 9.5 4a8.5 8.5 0 1 0 10.5 10.5Z"/></svg></span></div></div><a class="btn btn-p" href="dashboard.html">Créer un compte</a></div></nav>
+<section class="tsec" data-dust="1.1"><div class="tbg"></div><svg class="fx-waves fx" data-n="6" data-h="300" style="top:22%;height:300px"></svg><div class="blob" style="left:18%;top:4%;width:460px;height:460px;background:rgba(201,164,92,.16);animation-delay:0s"></div><div class="blob" style="left:62%;top:30%;width:520px;height:520px;background:rgba(30,63,110,.55);animation-delay:4s"></div>
+<div class="wrap thero"><div class="ar shine rv in" style="font-size:44px">الاشتراك</div>
+<h1 class="serif rv in" style="margin-top:6px">Nos abonnements</h1>
+<p class="lead rv in" style="margin:20px auto 0">Commencez gratuitement, passez Premium pour un usage illimité, ou choisissez l’accès à vie. Sans engagement.</p>
+<div style="margin-top:30px" class="rv in"><div class="toggle" id="tg"><button data-v="mensuel">Mensuel</button><button data-v="annuel" class="on">Annuel <em>−30 %</em></button><button data-v="vie">À vie</button></div></div>
+<div class="trial rv in"><span class="gift">🎁</span><span class="tt">7 jours gratuits</span><span class="ts">sur toutes les formules, sans engagement</span></div>
+</div>
+<div class="wrap">
+<div class="plans" id="plans">
+<div class="card plan rv  a-free" data-p="gratuit"><span class="badge"></span><div class="glint"></div><div class="eyebrow">Gratuit</div><div class="amt">0 €</div><ul><li class=""><span>15 commandes par jour</span></li><li class=""><span>100 tokens API offerts à l’inscription</span></li><li class=""><span>Radio Coran en message privé<small>160 radios en direct, à écouter seul ou avec la communauté dans Quran Radio</small></span></li><li class=""><span>Publication automatisée<small>Jusqu’à 5 publications par jour dans le salon de votre choix</small></span></li><li class=""><span>Horaires de prière<small>Avec la commande /salat, par exemple /salat ville:Paris</small></span></li></ul><a class="btn btn-g" href="dashboard.html">Commencer gratuitement</a></div>
+<div class="card plan rv feat a-year" data-p="annuel"><span class="badge">Le plus avantageux</span><div class="glint"></div><div class="eyebrow">Premium annuel</div><div class="amt">58,99 € <small>/ an</small></div><p class=muted>soit <b style="color:var(--text)">4,92 € / mois</b> au lieu de 6,99 €</p><ul><li class=""><span>Commandes illimitées</span></li><li class=""><span>472 stations de radio Coran <span class="upd sm"><i></i>Enrichi à chaque mise à jour</span></span></li><li class=""><span>5 000 tokens API offerts par an</span></li><li class=""><span>Bot Telegram offert</span></li><li class=""><span>Mini-jeux intégrés aux bots Discord et Telegram<small>Devine la sourate, Complète le verset, Qui suis-je ?, Vrai ou faux, Quiz hadith &amp; sîra</small></span></li><li class=""><span>Publication automatisée illimitée</span></li><li class=""><span>Support prioritaire</span></li></ul><a class="btn btn-gold" href="dashboard.html">Passer Premium</a></div>
+<div class="card plan rv  a-month" data-p="mensuel"><span class="badge"> </span><div class="glint"></div><div class="eyebrow">Premium mensuel</div><div class="amt">6,99 € <small>/ mois</small></div><p class=muted>Sans engagement, résiliable à tout moment.</p><ul><li class=""><span>Commandes illimitées</span></li><li class=""><span>472 stations de radio Coran <span class="upd sm"><i></i>Enrichi à chaque mise à jour</span></span></li><li class=""><span>Mini-jeux intégrés aux bots Discord et Telegram<small>Devine la sourate, Complète le verset, Qui suis-je ?, Vrai ou faux, Quiz hadith &amp; sîra</small></span></li><li class=""><span>Publication automatisée illimitée</span></li><li class=""><span>Support prioritaire</span></li></ul><a class="btn btn-gold" href="dashboard.html">Passer Premium</a></div>
+</div>
+<div style="position:relative" id="vie"><div class="card life rv a-life"><div class="glint"></div>
+<div><span class="fbadge">✦ Investisseur à vie</span><div class="eyebrow" style="margin-top:18px">Accès à vie</div><div class="amt">149,99 € <small>en une seule fois</small></div><a class="btn btn-gold breathe" style="margin-top:22px" href="dashboard.html">Obtenir l’accès à vie</a></div>
+<ul><li><span>Accès à vie à la radio Coran 24h/24</span></li><li><span>Messages de rappel programmés, avec ou sans illustration</span></li><li><span>Usage illimité et 15 000 tokens API offerts</span></li><li><span>Accès à la banque d’images Bayt Al-Ilm</span></li><li><span>Support prioritaire à vie</span></li><li><span>Accès bêta en avant-première aux nouvelles fonctions</span></li><li><span>Ajout de votre propre récitation sous conditions</span></li></ul></div>
+</div>
+</div></section>
+<section style="padding:0 0 90px"><div class="wrap">
+<div style="margin-top:20px" class="shead" id="packs"><h2 class="serif" style="margin-top:0">Packs de tokens API</h2><a class="faqlink" href="#faq">Voir la FAQ</a></div>
+<div class="tok rv">
+<div class="tk"><div class="coins" data-k="3"><i style="top:96px"></i><i style="top:87px"></i><i style="top:78px"></i></div><div class="big" data-count="300" data-dur="5200"></div><div class="unit">tokens API</div><div class="pr"><b>1,99 €</b><a class="btn btn-g btn-sm">Acheter</a></div></div>
+<div class="tk is-hover"><span class="best">Populaire</span><div class="coins" data-k="6"><i style="top:96px"></i><i style="top:87px"></i><i style="top:78px"></i><i style="top:69px"></i><i style="top:60px"></i><i style="top:51px"></i></div><div class="big" data-count="700" data-dur="5200"></div><div class="unit">tokens API</div><div class="pr"><b>2,99 €</b><a class="btn btn-p btn-sm">Acheter</a></div></div>
+<div class="tk"><span class="best">Meilleur prix</span><div class="coins" data-k="10"><i style="top:96px"></i><i style="top:87px"></i><i style="top:78px"></i><i style="top:69px"></i><i style="top:60px"></i><i style="top:51px"></i><i style="top:42px"></i><i style="top:33px"></i><i style="top:24px"></i><i style="top:15px"></i></div><div class="big" data-count="1500" data-dur="5200"></div><div class="unit">tokens API</div><div class="pr"><b>5,99 €</b><a class="btn btn-g btn-sm">Acheter</a></div></div>
+</div>
+
+
+<div style="max-width:900px;margin:120px auto 0" id="faq"><h2 class="serif" style="margin-bottom:28px">Questions fréquentes</h2><div class="faq">
+<div class="q"><span>Que se passe-t-il après les 7 jours gratuits ?</span><span>−</span></div><div class="a">Vous restez sur l’offre gratuite (15 commandes par jour), sauf si vous passez Premium ou choisissez l’accès à vie. Aucun prélèvement automatique.</div>
+<div class="q"><span>À quoi servent les tokens API ?</span><span>−</span></div><div class="a">Ils servent à appeler notre API islamique (Coran, hadiths, horaires de prière…). Chaque appel consomme des tokens API, et ils n’expirent jamais.</div>
+<div class="q"><span>Comment écouter la radio avec l’offre gratuite ?</span><span>+</span></div>
+<div class="q"><span>Un abonnement vaut-il pour les 3 bots ?</span><span>+</span></div>
+<div class="q"><span>Qu’est-ce que l’accès à vie ?</span><span>+</span></div><div class="q"><span>Puis-je changer d’offre ou résilier ?</span><span>+</span></div></div></div>
+<div class="paymini rv"><span>🔒 Paiement sécurisé</span><a href="https://stripe.com" title="Stripe" class="pm-l"><svg class="" width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M13.976 9.15c-2.172-.806-3.356-1.426-3.356-2.409 0-.831.683-1.305 1.901-1.305 2.227 0 4.515.858 6.09 1.631l.89-5.494C18.252.975 15.697 0 12.165 0 9.667 0 7.589.654 6.104 1.872 4.56 3.147 3.757 4.992 3.757 7.218c0 4.039 2.467 5.76 6.476 7.219 2.585.92 3.445 1.574 3.445 2.583 0 .98-.84 1.545-2.354 1.545-1.875 0-4.965-.921-6.99-2.109l-.9 5.555C5.175 22.99 8.385 24 11.714 24c2.641 0 4.843-.624 6.328-1.813 1.664-1.305 2.525-3.236 2.525-5.732 0-4.128-2.524-5.851-6.594-7.305h.003z"/></svg> Stripe</a><span class="faint">carte, Apple Pay, Google Pay</span><span class="sep">·</span><a href="https://discord.com" title="Boutique Discord" class="pm-l"><svg class="" width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M20.317 4.3698a19.7913 19.7913 0 00-4.8851-1.5152.0741.0741 0 00-.0785.0371c-.211.3753-.4447.8648-.6083 1.2495-1.8447-.2762-3.68-.2762-5.4868 0-.1636-.3933-.4058-.8742-.6177-1.2495a.077.077 0 00-.0785-.037 19.7363 19.7363 0 00-4.8852 1.515.0699.0699 0 00-.0321.0277C.5334 9.0458-.319 13.5799.0992 18.0578a.0824.0824 0 00.0312.0561c2.0528 1.5076 4.0413 2.4228 5.9929 3.0294a.0777.0777 0 00.0842-.0276c.4616-.6304.8731-1.2952 1.226-1.9942a.076.076 0 00-.0416-.1057c-.6528-.2476-1.2743-.5495-1.8722-.8923a.077.077 0 01-.0076-.1277c.1258-.0943.2517-.1923.3718-.2914a.0743.0743 0 01.0776-.0105c3.9278 1.7933 8.18 1.7933 12.0614 0a.0739.0739 0 01.0785.0095c.1202.099.246.1981.3728.2924a.077.077 0 01-.0066.1276 12.2986 12.2986 0 01-1.873.8914.0766.0766 0 00-.0407.1067c.3604.698.7719 1.3628 1.225 1.9932a.076.076 0 00.0842.0286c1.961-.6067 3.9495-1.5219 6.0023-3.0294a.077.077 0 00.0313-.0552c.5004-5.177-.8382-9.6739-3.5485-13.6604a.061.061 0 00-.0312-.0286zM8.02 15.3312c-1.1825 0-2.1569-1.0857-2.1569-2.419 0-1.3332.9555-2.4189 2.157-2.4189 1.2108 0 2.1757 1.0952 2.1568 2.419 0 1.3332-.9555 2.4189-2.1569 2.4189zm7.9748 0c-1.1825 0-2.1569-1.0857-2.1569-2.419 0-1.3332.9554-2.4189 2.1569-2.4189 1.2108 0 2.1757 1.0952 2.1568 2.419 0 1.3332-.946 2.4189-2.1568 2.4189Z"/></svg> Boutique Discord</a><span class="sep">·</span><span class="faint">Telegram Stars</span></div>
+</div></section><script>
+(function(){if(document.documentElement.classList.contains('static'))return;
+document.querySelectorAll('.tk').forEach(tk=>{const c=tk.querySelector('.coins'),b=tk.querySelector('.big'),k=+c.dataset.k,end=+b.dataset.count,is=[...c.children];is.forEach(i=>i.classList.add('off'));
+ const loop=()=>{const v=parseInt((b.textContent||'0').replace(/\D/g,''))||0;const n=Math.round(k*v/end);is.forEach((i,j)=>i.classList.toggle('off',j>=n));if(v<end)requestAnimationFrame(loop)};
+ new IntersectionObserver((es,o)=>{if(es[0].isIntersecting){o.disconnect();requestAnimationFrame(loop)}}).observe(b)})})();
+</script><script>
+(function(){const tg=document.getElementById('tg'),plans=document.getElementById('plans'),vie=document.getElementById('vie');
+function setv(v){tg.querySelectorAll('button').forEach(b=>b.classList.toggle('on',b.dataset.v===v));
+ plans.style.display=v==='vie'?'none':'';vie.classList.toggle('solo',v==='vie');
+ plans.querySelectorAll('.plan').forEach(p=>{const on=p.dataset.p===v;if(p.dataset.p!=='gratuit'){p.classList.toggle('feat',on);p.querySelector('.badge').textContent=on?(v==='annuel'?'Le plus avantageux':'Sans engagement'):'';p.querySelector('.badge').style.display=on?'':'none'}})}
+tg.querySelectorAll('button').forEach(b=>b.onclick=()=>setv(b.dataset.v));setv(new URLSearchParams(location.search).get('offre')||'annuel');})();
+</script><footer data-dust=".4"><svg class="fx-waves fx" data-n="5" data-h="300" style="top:auto;height:220px;bottom:0;opacity:.8"></svg><div class="wrap"><div class="fgrid">
+<div><a class="logo" href="accueil.html"><span class="lgm"><img class="th-d" src="assets/img/logo-256.jpg" alt="Logo BAYT AL-ILM بيت العلم"><img class="th-l" src="assets/img/logo-256-clair.png" alt="Logo BAYT AL-ILM بيت العلم"></span><span>BAYT AL-ILM</span><span class="ar">بيت العلم</span></a><p class="muted" style="margin-top:18px;max-width:310px;font-size:14.5px">Bots islamiques authentiques, radio Coran en direct et API islamique pour développeurs. Chaque contenu est sourcé.</p>
+<div class="socials"><a href="https://discord.gg/x2zw7ed4nM" target="_blank" rel="noopener" aria-label="Discord"><div class="plogo pl-discord" style="width:38px;height:38px;border-radius:11px"><svg class="" width="38" height="38" viewBox="0 0 24 24" fill="currentColor"><path d="M20.317 4.3698a19.7913 19.7913 0 00-4.8851-1.5152.0741.0741 0 00-.0785.0371c-.211.3753-.4447.8648-.6083 1.2495-1.8447-.2762-3.68-.2762-5.4868 0-.1636-.3933-.4058-.8742-.6177-1.2495a.077.077 0 00-.0785-.037 19.7363 19.7363 0 00-4.8852 1.515.0699.0699 0 00-.0321.0277C.5334 9.0458-.319 13.5799.0992 18.0578a.0824.0824 0 00.0312.0561c2.0528 1.5076 4.0413 2.4228 5.9929 3.0294a.0777.0777 0 00.0842-.0276c.4616-.6304.8731-1.2952 1.226-1.9942a.076.076 0 00-.0416-.1057c-.6528-.2476-1.2743-.5495-1.8722-.8923a.077.077 0 01-.0076-.1277c.1258-.0943.2517-.1923.3718-.2914a.0743.0743 0 01.0776-.0105c3.9278 1.7933 8.18 1.7933 12.0614 0a.0739.0739 0 01.0785.0095c.1202.099.246.1981.3728.2924a.077.077 0 01-.0066.1276 12.2986 12.2986 0 01-1.873.8914.0766.0766 0 00-.0407.1067c.3604.698.7719 1.3628 1.225 1.9932a.076.076 0 00.0842.0286c1.961-.6067 3.9495-1.5219 6.0023-3.0294a.077.077 0 00.0313-.0552c.5004-5.177-.8382-9.6739-3.5485-13.6604a.061.061 0 00-.0312-.0286zM8.02 15.3312c-1.1825 0-2.1569-1.0857-2.1569-2.419 0-1.3332.9555-2.4189 2.157-2.4189 1.2108 0 2.1757 1.0952 2.1568 2.419 0 1.3332-.9555 2.4189-2.1569 2.4189zm7.9748 0c-1.1825 0-2.1569-1.0857-2.1569-2.419 0-1.3332.9554-2.4189 2.1569-2.4189 1.2108 0 2.1757 1.0952 2.1568 2.419 0 1.3332-.946 2.4189-2.1568 2.4189Z"/></svg></div></a><a href="https://t.me/BAytalilm1" target="_blank" rel="noopener" aria-label="Telegram"><div class="plogo pl-telegram" style="width:38px;height:38px;border-radius:11px"><svg class="" width="38" height="38" viewBox="0 0 24 24" fill="currentColor"><path d="M11.944 0A12 12 0 0 0 0 12a12 12 0 0 0 12 12 12 12 0 0 0 12-12A12 12 0 0 0 12 0a12 12 0 0 0-.056 0zm4.962 7.224c.1-.002.321.023.465.14a.506.506 0 0 1 .171.325c.016.093.036.306.02.472-.18 1.898-.962 6.502-1.36 8.627-.168.9-.499 1.201-.82 1.23-.696.065-1.225-.46-1.9-.902-1.056-.693-1.653-1.124-2.678-1.8-1.185-.78-.417-1.21.258-1.91.177-.184 3.247-2.977 3.307-3.23.007-.032.014-.15-.056-.212s-.174-.041-.249-.024c-.106.024-1.793 1.14-5.061 3.345-.48.33-.913.49-1.302.48-.428-.008-1.252-.241-1.865-.44-.752-.245-1.349-.374-1.297-.789.027-.216.325-.437.893-.663 3.498-1.524 5.83-2.529 6.998-3.014 3.332-1.386 4.025-1.627 4.476-1.635z"/></svg></div></a><a href="https://x.com/baytalilm" target="_blank" rel="noopener" aria-label="X"><div class="plogo pl-x" style="width:38px;height:38px;border-radius:11px"><svg class="" width="38" height="38" viewBox="0 0 24 24" fill="currentColor"><path d="M14.234 10.162 22.977 0h-2.072l-7.591 8.824L7.251 0H.258l9.168 13.343L.258 24H2.33l8.016-9.318L16.749 24h6.993zm-2.837 3.299-.929-1.329L3.076 1.56h3.182l5.965 8.532.929 1.329 7.754 11.09h-3.182z"/></svg></div></a><a href="https://www.instagram.com/baytalilm1" target="_blank" rel="noopener" aria-label="Instagram"><div class="plogo pl-instagram" style="width:38px;height:38px;border-radius:11px"><svg class="" width="38" height="38" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="5.2"/><circle cx="12" cy="12" r="4.1"/><circle cx="17.4" cy="6.6" r="1.1" fill="currentColor" stroke="none"/></svg></div></a></div></div>
+<div><h5>Bots</h5><ul><li><a href="bot-discord.html">Discord</a></li><li><a href="bot-telegram.html">Telegram</a></li><li><a href="bot-x.html">X</a></li><li><a href="bots.html">Comparer les bots</a></li></ul></div>
+<div><h5>Produit</h5><ul><li><a href="abonnements.html">Abonnements</a></li><li><a href="abonnements.html#packs">Tokens API</a></li><li><a href="api.html">API développeurs</a></li><li><a href="dashboard.html">Tableau de bord</a></li></ul></div>
+<div><h5>Ressources</h5><ul><li><a href="radio.html">Radio Coran en direct</a></li><li><a href="prieres.html">Horaires de prière</a></li><li><a href="api.html#catalogue">Documentation API</a></li><li><a href="contact.html">Contact</a></li></ul></div>
+<div><h5>Légal</h5><ul><li><a href="legal.html">Conditions d’utilisation</a></li><li><a href="legal-confidentialite.html">Politique de confidentialité</a></li><li><a href="legal-confidentialite.html#droits">Vos données et vos droits</a></li><li><a href="contact.html">Signaler un contenu</a></li></ul></div>
+</div><div class="fbottom"><span>© 2026 BAYT AL-ILM <span class="ar-i">بيت العلم</span>. Tous droits réservés.</span><span class="flegal"><a href="legal.html">Conditions d’utilisation</a><a href="legal-confidentialite.html">Politique de confidentialité</a></span><a class="handle" href="https://x.com/baytalilm" target="_blank" rel="noopener">@baytalilm</a></div></div></footer></body></html>
