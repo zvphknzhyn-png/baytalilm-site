@@ -74,4 +74,4 @@ const LB=document.getElementById('lb'),LI=document.getElementById('lbi');
 G.addEventListener('click',e=>{const b=e.target.closest('button.bc');if(!b)return;const src='assets/banque/'+b.dataset.k+'-hd.webp';LI.src=src;LI.alt=b.dataset.l;document.getElementById('lbt').textContent=b.dataset.l;const d=document.getElementById('lbd');d.href=src;d.download='bayt-al-ilm-'+b.dataset.k+'.webp';LB.classList.add('on')});
 function close(){LB.classList.remove('on');LI.src=''}
 document.getElementById('lbx').onclick=close;LB.addEventListener('click',e=>{if(e.target===LB)close()});addEventListener('keydown',e=>{if(e.key==='Escape')close()});
-})();</script></body></html>
+})();</script><script src="assets/js/config.js"></script><script src="assets/js/fonct.js"></script></body></html>
