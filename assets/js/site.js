@@ -2,8 +2,8 @@
 (function(){
 const q=new URLSearchParams(location.search), root=document.documentElement;
 const theme=q.get('theme')||localStorage.getItem('bt-theme')||'dark'; root.setAttribute('data-theme',theme);
-const STATIC=q.get('static')==='1'; if(STATIC) root.classList.add('static'); if(q.get('ann')==='1') root.classList.add('show-ann');
-window.setTheme=t=>{root.setAttribute('data-theme',t);localStorage.setItem('bt-theme',t)};
+const STATIC=q.get('static')==='1'||(window.matchMedia&&matchMedia('(prefers-reduced-motion: reduce)').matches); if(STATIC) root.classList.add('static'); if(q.get('ann')==='1') root.classList.add('show-ann');
+window.setTheme=t=>{root.setAttribute('data-theme',t);try{localStorage.setItem('bt-theme',t)}catch(e){}document.querySelectorAll('.theme span').forEach(s=>s.setAttribute('aria-pressed',String(s.dataset.t===t)))};
 document.addEventListener('DOMContentLoaded',()=>{
  // emojis style Apple : remplace chaque emoji par son image (assets/emoji/<code>.png)
  const BL='→↓⇄☆★☰⚇⚿✦✓⏮⏭▶◀⌘';const RE=/(\p{Extended_Pictographic})\uFE0F?/gu,RT=/\p{Extended_Pictographic}/u;
@@ -68,6 +68,6 @@ document.addEventListener('DOMContentLoaded',()=>{
   if(STATIC){bar.style.width='38%';return}
   const up=()=>{const f=secs[0].getBoundingClientRect().top+scrollY-200,l=secs[secs.length-1].getBoundingClientRect().bottom+scrollY-innerHeight;bar.style.width=Math.max(0,Math.min(100,(scrollY-f)/(l-f)*100))+'%';let k=0;secs.forEach((s,i)=>{if(s.getBoundingClientRect().top<innerHeight*.4)k=i});links.forEach((a,i)=>a.classList.toggle('on',i===k))};addEventListener('scroll',up,{passive:true});up()});
  // theme toggle
- document.querySelectorAll('.theme span').forEach(s=>s.addEventListener('click',()=>setTheme(s.dataset.t)));
+ document.querySelectorAll('.theme span').forEach(s=>{s.setAttribute('role','button');s.setAttribute('tabindex','0');s.setAttribute('aria-label',s.dataset.t==='light'?'Thème clair':'Thème sombre');s.addEventListener('click',()=>setTheme(s.dataset.t));s.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();setTheme(s.dataset.t)}})});setTheme(root.getAttribute('data-theme'));
 });
 })();
