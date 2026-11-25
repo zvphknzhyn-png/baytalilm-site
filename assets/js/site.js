@@ -71,3 +71,8 @@ document.addEventListener('DOMContentLoaded',()=>{
  document.querySelectorAll('.theme span').forEach(s=>{s.setAttribute('role','button');s.setAttribute('tabindex','0');s.setAttribute('aria-label',s.dataset.t==='light'?'Thème clair':'Thème sombre');s.addEventListener('click',()=>setTheme(s.dataset.t));s.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();setTheme(s.dataset.t)}})});setTheme(root.getAttribute('data-theme'));
 });
 })();
+
+/* défilement : les conteneurs en overflow:hidden ne doivent jamais « défiler » lors d'un saut d'ancre (sinon la page semble bloquée) */
+(function(){const fix=()=>{if(!(window.CSS&&CSS.supports('overflow','clip')))return;document.querySelectorAll('body *').forEach(e=>{const s=getComputedStyle(e);if(s.overflowX==='hidden'&&s.overflowY==='hidden'&&e!==document.body){e.style.overflow='clip';if(e.scrollTop)e.scrollTop=0;if(e.scrollLeft)e.scrollLeft=0}})};
+ if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',()=>setTimeout(fix,60));else setTimeout(fix,60);
+ addEventListener('hashchange',()=>document.querySelectorAll('section,footer,.card,.main').forEach(e=>{if(e.scrollTop)e.scrollTop=0}));})();

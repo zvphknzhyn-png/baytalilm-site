@@ -91,7 +91,17 @@ const heads=[...document.querySelectorAll('#index .ix')];const kinds=['live','th
 heads.forEach((ix,k)=>{ix.dataset.kind=kinds[k]||'live';ix.classList.add('coll')});
 document.addEventListener('click',e=>{const i=e.target.closest('.ix-i');if(i&&i.closest('#index')){open(i)}});
 document.querySelectorAll('.ix-i').forEach(i=>{i.setAttribute('role','button');i.setAttribute('tabindex','0');i.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();open(i)}})});
-// déroulants : quelques lignes puis une flèche
-document.querySelectorAll('#index .ix-more').forEach((a,k)=>{const ix=a.previousElementSibling&&a.previousElementSibling.classList.contains('ix')?a.previousElementSibling:heads[k];const lab=a.textContent.replace(' ↓','');a.setAttribute('role','button');a.setAttribute('tabindex','0');a.setAttribute('aria-expanded','false');
- const tog=e=>{e.preventDefault();const o=ix.classList.toggle('coll');a.textContent=o?lab+' ↓':'Réduire la liste ↑';a.setAttribute('aria-expanded',String(!o))};a.addEventListener('click',tog);a.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' ')tog(e)})});
+// déroulants : les premières lignes, puis tout s'affiche en se déroulant vers le bas
+const SHOW=40;
+document.querySelectorAll('#index .ix-more').forEach((a,k)=>{const ix=a.previousElementSibling&&a.previousElementSibling.classList.contains('ix')?a.previousElementSibling:heads[k];
+ const items=[...ix.querySelectorAll('.ix-i')],total=items.length;
+ // masque les entrées au-delà des SHOW premières, et les lettres devenues vides
+ const marks=[];items.forEach((it,i)=>{if(i>=SHOW){it.classList.add('xh');marks.push(it)}});
+ ix.querySelectorAll('.ix-l').forEach(l=>{let nx=l.nextElementSibling,any=false;while(nx&&!nx.classList.contains('ix-l')){if(nx.classList.contains('ix-i')&&!nx.classList.contains('xh'))any=true;nx=nx.nextElementSibling}if(!any){l.classList.add('xh')}});
+ [...ix.children].forEach(c=>{if(!c.classList.contains('ix-i')&&!c.classList.contains('ix-l')&&c.querySelector&&c.querySelector('.ix-i')&&![...c.querySelectorAll('.ix-i')].some(i=>!i.classList.contains('xh')))c.classList.add('xh')});
+ const lab0=a.textContent.replace(/\s*↓\s*$/,'').replace(/\s*\(\d+\)$/,'');const lab=lab0+' ('+total+') ↓';a.textContent=lab;
+ a.setAttribute('role','button');a.setAttribute('tabindex','0');a.setAttribute('aria-expanded','false');
+ const tog=e=>{e.preventDefault();e.stopImmediatePropagation();const shut=ix.classList.toggle('coll');a.textContent=shut?lab:'Réduire la liste ↑';a.setAttribute('aria-expanded',String(!shut));a.style.display='';
+  if(shut){const r=ix.getBoundingClientRect();if(r.top<0)scrollTo({top:scrollY+r.top-100})}};
+ a.addEventListener('click',tog);a.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' ')tog(e)})});
 })();

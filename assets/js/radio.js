@@ -77,7 +77,7 @@ function toggle(){
   else playTrack(trk,true)}
  else{audio.pause();if(isLive(cur)){audio.removeAttribute('src');audio.load()}}
 }
-audio.addEventListener('playing',()=>{paused(false);errs=0;setState(isLive(cur)?'En direct':'En lecture')});
+audio.addEventListener('playing',()=>{paused(false);errs=0;setState(isLive(cur)?'En direct':'En lecture');if(cur&&isLive(cur))el.psub.textContent=((cur.f||[]).includes('theme')?'Radio thématique : ':'Récitation en direct : ')+cur.n;try{document.dispatchEvent(new CustomEvent('bt:playing',{detail:cur}))}catch(e){}});
 audio.addEventListener('waiting',()=>{if(!audio.paused)setState('Mise en mémoire…')});
 audio.addEventListener('pause',()=>{if(!audio.ended){paused(true);setState('En pause')}});
 audio.addEventListener('play',()=>{paused(false)});
@@ -100,6 +100,7 @@ function syncFav(){const on=cur&&FAV.includes(cur.id);if(favB)favB.classList.tog
 function toggleFav(id){const i=FAV.indexOf(id);if(i>=0)FAV.splice(i,1);else FAV.push(id);saveFav();syncFav();if(F==='fav')render()}
 if(favB)favB.onclick=()=>{if(cur)toggleFav(cur.id)};
 if('mediaSession' in navigator){try{navigator.mediaSession.setActionHandler('play',()=>toggle());navigator.mediaSession.setActionHandler('pause',()=>toggle());navigator.mediaSession.setActionHandler('nexttrack',()=>nextB&&nextB.click());navigator.mediaSession.setActionHandler('previoustrack',()=>prevB&&prevB.click())}catch(e){}}
+window.BaytRadio={play:id=>{const s=BYID[id];if(s)startStation(s,true)},get:id=>BYID[id]};
 /* ---------- bibliothèque ---------- */
 const grid=$('#stations'),q=$('#q'),cnt=$('#cnt'),empty=$('#empty'),sortB=$('#sort');
 let F='all',asc=true,shown=60,showAll=false,FEAT=[],more=null,tplL=null,tplP=null;
@@ -112,7 +113,7 @@ function card(s){
  $('.cv .ar',c).textContent=(s.a||s.n).split(' ')[0];
  $('b',c).textContent=s.n;
  const sp=$$('.meta span',c);if(sp[1])sp[1].textContent='n° '+s.id;
- const m=$$('.meta',c);m[m.length-1].textContent=live?((s.f||[]).includes('theme')?'Radio thématique · ':'Radio 24h/24 · ')+((s.f||[]).includes('mp')?'Serveur et message privé':'Serveur seulement'):RIW(s);
+ const m=$$('.meta',c);m[m.length-1].textContent=live?((s.f||[]).includes('theme')?'Radio thématique · ':'Radio 24h/24 · ')+((s.f||[]).includes('mp')?'Serveur et message privé':'Ici et sur le serveur Discord'):RIW(s);
  const fv=$('.fav',c),pl=$('.pl',c);const o=FAV.includes(s.id);fv.classList.toggle('on',o);fv.textContent=o?'★':'☆';
  [fv,pl].forEach(x=>{x.setAttribute('role','button');x.tabIndex=0});
  return c}
